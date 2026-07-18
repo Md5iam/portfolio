@@ -88,8 +88,8 @@ export const Skills3DSphere: React.FC = () => {
       });
     }
 
-    let rx = 0.003;
-    let ry = 0.005;
+    let rx = 0.007;
+    let ry = 0.012;
     let isDragging = false;
     let lastMouseX = 0;
     let lastMouseY = 0;
@@ -110,8 +110,8 @@ export const Skills3DSphere: React.FC = () => {
       const dx = clientX - lastMouseX;
       const dy = clientY - lastMouseY;
 
-      ry = -dx * 0.0025;
-      rx = -dy * 0.0025;
+      ry = -dx * 0.004;
+      rx = -dy * 0.004;
 
       lastMouseX = clientX;
       lastMouseY = clientY;
@@ -202,12 +202,12 @@ export const Skills3DSphere: React.FC = () => {
 
       setProjectedTags(projected);
 
-      // Deceleration
+      // Smooth fast continuous auto-rotation
       if (!isDragging) {
         rx *= 0.98;
         ry *= 0.98;
-        if (Math.abs(rx) < 0.001) rx = 0.0015;
-        if (Math.abs(ry) < 0.001) ry = 0.0025;
+        if (Math.abs(rx) < 0.005) rx = 0.006;
+        if (Math.abs(ry) < 0.009) ry = 0.011;
       }
 
       animationFrameId = requestAnimationFrame(render);
